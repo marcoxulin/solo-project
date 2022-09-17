@@ -5,7 +5,8 @@ module.exports = {
     entry: './client/index.js',
     output: {
         path: path.resolve(__dirname,'build'),
-        filename: 'bundle.js'
+        filename: 'bundle.js',
+        publicPath: '/',
     },
     mode: 'development',
     module: {
@@ -30,9 +31,19 @@ module.exports = {
         template: './client/index.html'
     })],
     devServer: {
+        host: 'localhost',
+        port: 8080,
+        historyApiFallback: true,
         static: {
-            directory: path.resolve(__dirname, 'build'),
-            publicPath: '/build'
-        }
+            directory: path.resolve(__dirname, 'dist'),
+            // match the output 'publicPath'
+            publicPath: '/',
+          },
+          proxy: {
+            '/api/**': {
+              target: 'http://localhost:3000/',
+              secure: false,
+            },
+          },
     }
 };
