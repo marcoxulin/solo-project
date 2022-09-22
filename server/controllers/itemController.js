@@ -1,4 +1,4 @@
-const { default: mongoose } = require('mongoose');
+const mongoose = require('mongoose');
 const Item = require('../itemModel.js');
 
 const itemController = {};
@@ -9,15 +9,16 @@ itemController.getItems = async (req, res, next) => {
        res.locals.allItems = allItems;
        return next();
     } catch (error){
-        return next({log: 'error found in getItems', message: {err:'error in itemController.getItems'}});
+        return next({log: 'error found in getItems '+ error, message: {err:'Error: ' + error}});
     }
 }
 
 itemController.getSingleItem = async  (req, res, next) => {
     const { id } = req.query;
-    if(!mongoose.Types.ObjectId.isValid()){
-        return res.status(404).json({error: 'Item not found'});
-    }
+    console.log(id);
+    // if(!mongoose.Types.ObjectId.isValid()){
+    //     return res.status(404).json({error: 'Item not found'});
+    // }
     const item = await Item.findById(id);
     if(!item){
        return res.status(404).json({error: 'Item not found'});
@@ -29,23 +30,25 @@ itemController.getSingleItem = async  (req, res, next) => {
 
 itemController.addItem = async (req, res, next) => {
     const {title, category} = req.body;
+    if(!title){
+        return res.status(400).json({error: 'Please fill the title box'});
+    }
     try{
-        const item = await Item.create({title, category});
+        const item = await Item.create({title: title, category: category});
         res.locals.addItem = item;
         return next();
     } catch (error) {
         //maybe add more descrition error
-        return next({log: 'error found in getItems', message: {err:'error in itemController.getItems'}});
+        return next({log: 'error found in addItem: ' + error, message: {err: 'Error: '+ error}});
     }
 }
 
-//not working
 itemController.updateItem = async (req, res, next) => {
     const {id} = req.params;
     console.log (id);
-    if(!mongoose.Types.ObjectId.isValid()){
-        return res.status(404).json({error: 'Item not found'});
-    }
+    // if(!mongoose.Types.ObjectId.isValid()){
+    //     return res.status(404).json({error: 'Item not found'});
+    // }
     const item = await Item.findOneAndUpdate({_id: id}, 
         {...req.body}
         );
@@ -58,11 +61,12 @@ itemController.updateItem = async (req, res, next) => {
 }
 
 itemController.delete = async (req, res, next) => {
-    const {id} = req.query;
-    if(!mongoose.Types.ObjectId.isValid()){
-        return res.status(404).json({error: 'Item not found'});
-    }
-    const item = await Item.findByIdAndDelete({_id: id});
+    const { id } = req.params;
+    console.log (id);
+    // if(!mongoose.Types.ObjectId.isValid()){
+    //     return res.status(404).json({error: 'Not valid id'});
+    // }
+    const item = await Item.findOneAndDelete({_id: id});
     if(!item){
         return res.status(404).json({error: 'Item not found'});
         //maybe redirect to main page

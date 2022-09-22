@@ -5,7 +5,7 @@ const { default: mongoose } = require('mongoose');
 const itemController = require('../controllers/itemController');
 const router = express.Router();
 
-//GET all item list
+//GET all items
 router.get('/', itemController.getItems, (req, res) => {
     res.status(200).json(res.locals.allItems);
 });
@@ -22,7 +22,7 @@ router.get('/newitem', (req, res) => {
 
 //POST to add item to the list
 router.post('/', itemController.addItem, (req, res) => {
-    res.status(200).json({message: 'Item added to the list'});
+    res.status(200).json(res.locals.addItem);
 })
 
 //GET to edit (UPDATE) item to the list
@@ -36,7 +36,7 @@ router.patch('/:id', itemController.updateItem, async (req, res) => {
 })
 
 //DELETE item 
-router.delete('/:id', async (req, res) => {
+router.delete('/:id', itemController.delete, (req, res) => {
      res.status(200).json({message: 'Item deleted'});
 });
 

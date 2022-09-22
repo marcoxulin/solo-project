@@ -22,8 +22,9 @@ module.exports = {
                 },
             },
             {
-                test: /\.s[ac]ss$/i,
-                use: ["style-loader", "css-loader", "sass-loader"]
+                test: /.(css|scss)$/,
+                exclude: /node_modules/,
+                use: ['style-loader', 'css-loader'],
             }
         ],
     },
@@ -40,8 +41,8 @@ module.exports = {
             publicPath: '/',
           },
           proxy: {
-            '/api/**': {
-              target: 'http://localhost:3000/',
+            '/api/items': {
+              target: 'http://[::1]:3000/',
               secure: false,
             },
           },
