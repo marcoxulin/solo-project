@@ -1,7 +1,5 @@
 const express = require('express');
 
-const { ModuleFilenameHelpers } = require('webpack');
-const { default: mongoose } = require('mongoose');
 const itemController = require('../controllers/itemController');
 const router = express.Router();
 

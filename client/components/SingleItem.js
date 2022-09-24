@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import formatDistanceToNow from 'date-fns/formatDistanceToNow';
 
 function SingleItem ({ item }) {
 
@@ -15,7 +16,7 @@ function SingleItem ({ item }) {
         <div className="item-details">
             <h4>{item.title}</h4>
             <p><strong>Category: </strong>{item.category}</p>
-            <p>{item.createdAt}</p>
+            <p><strong>Added: </strong>{formatDistanceToNow(new Date(item.createdAt), {addSuffix: true})}</p>
             <span>
                 <div>
                 <button className='btn-delete' onClick={deleteItem}>
@@ -23,9 +24,9 @@ function SingleItem ({ item }) {
                 </button>
                 </div>
                 <div>
-                <Link to='/edititem' className='edit-link'>
+                <Link to={`/edititem/${item._id}`} className='edit-link'>
                     <button type='button' className='btn-edit-item'>
-                        Edit Item
+                        Edit
                     </button>
                 </Link>
                 </div>

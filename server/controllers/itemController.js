@@ -9,16 +9,12 @@ itemController.getItems = async (req, res, next) => {
        res.locals.allItems = allItems;
        return next();
     } catch (error){
-        return next({log: 'error found in getItems '+ error, message: {err:'Error: ' + error}});
+        return next({log: 'error found in getItems ' + error, message: {err:'Error: ' + error}});
     }
 }
 
 itemController.getSingleItem = async  (req, res, next) => {
     const { id } = req.query;
-    console.log(id);
-    // if(!mongoose.Types.ObjectId.isValid()){
-    //     return res.status(404).json({error: 'Item not found'});
-    // }
     const item = await Item.findById(id);
     if(!item){
        return res.status(404).json({error: 'Item not found'});
@@ -45,10 +41,6 @@ itemController.addItem = async (req, res, next) => {
 
 itemController.updateItem = async (req, res, next) => {
     const {id} = req.params;
-    console.log (id);
-    // if(!mongoose.Types.ObjectId.isValid()){
-    //     return res.status(404).json({error: 'Item not found'});
-    // }
     const item = await Item.findOneAndUpdate({_id: id}, 
         {...req.body}
         );
@@ -62,10 +54,6 @@ itemController.updateItem = async (req, res, next) => {
 
 itemController.delete = async (req, res, next) => {
     const { id } = req.params;
-    console.log (id);
-    // if(!mongoose.Types.ObjectId.isValid()){
-    //     return res.status(404).json({error: 'Not valid id'});
-    // }
     const item = await Item.findOneAndDelete({_id: id});
     if(!item){
         return res.status(404).json({error: 'Item not found'});
