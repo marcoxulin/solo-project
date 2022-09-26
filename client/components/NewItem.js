@@ -20,7 +20,7 @@ function NewItem (){
 
         if(!response.ok){
             console.log(json);
-            setError(json.err)
+            setError(json.error)
         }
         if(response.ok){
             setTitle('');
@@ -39,13 +39,19 @@ function NewItem (){
                     </button>
                 </Link>
                 <form className='create' onSubmit={handleSubmit}>
-                    <h3>Add the item that you want to let go</h3>
-                    <label>Item name:</label>
-                    <input type='text' onChange={(e) => setTitle(e.target.value)} value={title}></input>
-                    <label>Category:</label>
-                    <input type='text' onChange={(e) => setCategory(e.target.value)} value={category}></input>
-                    <button>Add Item</button>
+                    <h3>Add Item to Declutter: </h3>
+                    <div className='input-area'>
+                        <label>Item name:</label>
+                        <input type='text' onChange={(e) => setTitle(e.target.value)} value={title}></input>
+                    </div>
+                    <div className='input-area'>
+                        <label>Category:</label>
+                        <input type='text' onChange={(e) => setCategory(e.target.value)} value={category}></input>
+                    </div>
+
                     {error && <div className='error'>{error}</div>}
+                   
+                    <button className='btn-add'>Add Item</button>
                 </form>
             </section>
         )

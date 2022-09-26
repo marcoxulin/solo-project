@@ -21,7 +21,8 @@ function Home (){
         return (
             //line 27: only map when items variable is not null
             <section className="home">
-                <h2>List of Items: </h2>
+
+                <h2>Items to Declutter: </h2>
                 <div className="items-list">
                 {items && items.map ((item) => (
                     // <p key={item._id}>{item.title}</p>

@@ -44,10 +44,14 @@ function EditItem (){
                 </Link>
                 <form className='create' onSubmit={handleSubmit}>
                     <h3>Edit Item: {params.id}</h3>
+                    <div>
                     <label>Item name:</label>
                     <input type='text' onChange={(e) => setTitle(e.target.value)} value={title}></input>
+                    </div>
+                    <div>
                     <label>Category:</label>
                     <input type='text' onChange={(e) => setCategory(e.target.value)} value={category}></input>
+                    </div>
                     <button>Accept</button>
                     {error && <div className='error'>{error}</div>}
                 </form>

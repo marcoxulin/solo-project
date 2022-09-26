@@ -5,6 +5,9 @@
   --error: #e7195a;
 }
 body {
+  display: flex;
+  flex-direction: column;
+  padding: 8px;
   background: #f1f1f1;
   margin: 0;
   font-family: 'Open Sans', sans-serif;
@@ -18,12 +21,26 @@ header .container {
   padding: 10px 20px;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-start;
 }
 header a {
   color: #333;
   text-decoration: none;
 }
+
+input[type=text] {
+  width: 30%;
+  padding: 12px 20px;
+  margin: 8px;
+  box-sizing: border-box;
+}
+
+button {
+  margin: 5px;
+  font-size: 1.1rem;
+  width: 100px;
+}
+
 .pages{
   max-width: 1400px;
   padding: 20px;
@@ -36,22 +53,41 @@ header a {
   grid-template-columns: 3fr 1fr;
   gap: 100px;
 }
+.item-list{
+  width: 100%;
+}
 .item-details {
+  border: solid 1px green;
   background: #fff;
   border-radius: 4px;
-  margin: 20px auto;
+  margin: 20px;
+  width: 60%;
   padding: 20px;
   position: relative;
   box-shadow: 2px 2px 5px rgba(0,0,0,0.05);
 }
+
+.btn-back{
+  margin: 5px;
+  width: auto;
+  padding: 10px;
+}
+
+.btn-add{
+  margin: 30px 0 10px 0;
+}
+
+.btn-new-item{
+  padding: 10px;
+}
 .item-details h4 {
   margin: 0 0 10px 0;
-  font-size: 1.2em;
+  font-size: 1.5em;
   color: var(--primary);
 }
 .item-details p {
   margin: 0;
-  font-size: 0.9em;
+  font-size: 1.1em;
   color: #555;
 }
 .item-details span {
@@ -61,6 +97,32 @@ header a {
   cursor: pointer;
   background: #f1f1f1;
   padding: 6px;
-  border-radius: 50%;
   color: #333;
+}
+
+
+.add-item-container{
+  justify-content: flex-start;
+  font-size: 20px;
+  padding: 10px;
+}
+
+.add-item-container button{
+  padding: 10px;
+}
+.edit-item-container{
+  font-size: 1.1rem;
+}
+
+.error{
+  margin: 20px;
+  width: 200px;
+  border: solid 1px red;
+  background: #fff;
+  color:#e7195a;
+  border-radius: 4px;
+  width: 40%;
+  padding: 20px;
+  position: relative;
+  box-shadow: 2px 2px 5px rgba(0,0,0,0.05);
 }
