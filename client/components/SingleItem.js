@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import formatDistanceToNow from 'date-fns/formatDistanceToNow';
-
+//single item component
 function SingleItem ({ item }) {
 
     const deleteItem = async () => {
